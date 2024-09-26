@@ -1,18 +1,15 @@
 import './app.css'
 import { useKeyDownEvent } from '@solid-primitives/keyboard'
 import { createEffect } from 'solid-js'
+import { play } from '~/audio'
 
 export default function App() {
-	function play() {
-		console.log('Play!')
-	}
-
 	let keyDownEvent = useKeyDownEvent()
 
-	createEffect(() => {
+	createEffect(async () => {
 		let ev = keyDownEvent()
 		if (ev) {
-			play()
+			await play()
 		}
 	})
 
