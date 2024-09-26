@@ -1,18 +1,19 @@
 import { isServer } from 'solid-js/web'
 
-let ctx: AudioContext
+let ctx: AudioContext | undefined
 
 export async function play() {
 	if (isServer) {
 		return
 	}
 
-	console.log('play!')
-
 	if (ctx) {
-		console.log('ctx on jo!')
+		console.log('playing already!')
 		return
 	}
+
+	console.log('play!')
+
 	ctx = new AudioContext({ sampleRate: 48000 })
 
 	let osc = new OscillatorNode(ctx, {
@@ -24,6 +25,21 @@ export async function play() {
 	osc.start(0)
 
 	await ctx.resume()
-
 }
 
+export async function stop() {
+	if (isServer) {
+		return
+	}
+
+	console.log('stop!')
+
+	if (!ctx) {
+		console.log('no context to stop')
+		return
+	}
+
+	await ctx.suspend()
+	await ctx.close()
+	ctx = undefined
+}

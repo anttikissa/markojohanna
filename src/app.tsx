@@ -1,7 +1,7 @@
 import './app.css'
 import { useKeyDownEvent } from '@solid-primitives/keyboard'
-import { createEffect } from 'solid-js'
-import { play } from '~/audio'
+import { createEffect, onCleanup } from 'solid-js'
+import { play, stop } from '~/audio'
 
 export default function App() {
 	let keyDownEvent = useKeyDownEvent()
@@ -9,8 +9,21 @@ export default function App() {
 	createEffect(async () => {
 		let ev = keyDownEvent()
 		if (ev) {
-			await play()
+			if (ev.key === 's') {
+				await stop()
+			} else if (ev.key === 'r') {
+				reload()
+			} else {
+				await play()
+			}
 		}
+	})
+
+	function reload() {
+		window.location.reload()
+	}
+	onCleanup(async () => {
+		await stop()
 	})
 
 	return (
@@ -19,6 +32,12 @@ export default function App() {
 				<p>
 					Press any key to
 					<button onClick={play}>Play</button>
+				</p>
+				<p>
+					Press s to <button onClick={stop}>Stop</button>
+				</p>
+				<p>
+					Press r to <button onClick={reload}>Reload page</button>
 				</p>
 			</div>
 		</main>
