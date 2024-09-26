@@ -10,7 +10,7 @@ type Note = number
 let oscs = [] as OscillatorNode[]
 let gains = [] as GainNode[]
 
-async function init(master: GainNode) {
+async function init(master: AudioNode) {
 	for (let i = 0; i < 24; i++) {
 		oscs[i] = new OscillatorNode(ctx, {
 			type: 'sine',

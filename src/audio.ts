@@ -1,6 +1,7 @@
 import { isServer } from 'solid-js/web'
 import organ from '~/organ'
 import { playSong } from '~/song'
+import reverb from '~/reverb'
 
 export let ctx: AudioContext
 
@@ -17,6 +18,7 @@ export async function play() {
 	console.log('play!')
 
 	ctx = new AudioContext({ sampleRate: 48000 })
+	await ctx.resume()
 
 	let osc = new OscillatorNode(ctx, {
 		type: 'sine',
@@ -28,11 +30,10 @@ export async function play() {
 	let master = new GainNode(ctx, { gain: 0.15 })
 	master.connect(ctx.destination)
 
-	await organ.init(master)
+	let reverbNode = await reverb.init(master)
+	await organ.init(reverbNode)
 
 	playSong(organ)
-
-	await ctx.resume()
 }
 
 export async function stop() {
