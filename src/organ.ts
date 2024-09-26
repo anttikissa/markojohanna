@@ -10,7 +10,7 @@ type Note = number
 let oscs = [] as OscillatorNode[]
 let gains = [] as GainNode[]
 
-export async function organInit(master: GainNode) {
+async function init(master: GainNode) {
 	for (let i = 0; i < 24; i++) {
 		oscs[i] = new OscillatorNode(ctx, {
 			type: 'sine',
@@ -24,10 +24,16 @@ export async function organInit(master: GainNode) {
 
 let maxGain = 0.4
 
-export async function organNoteOn(note: number) {
-	gains[note].gain.setTargetAtTime(maxGain, ctx.currentTime, 0.01)
+function setVol(note: number, vol: number) {
+	gains[note].gain.setTargetAtTime(vol, ctx.currentTime, 0.01)
 }
 
-export async function organNoteOff(note: number) {
-	gains[note].gain.setTargetAtTime(0, ctx.currentTime, 0.01)
+function noteOn(note: number) {
+	setVol(note, maxGain)
 }
+
+function noteOff(note: number) {
+	setVol(note, 0)
+}
+
+export default { init, noteOn, noteOff }
