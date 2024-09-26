@@ -1,6 +1,7 @@
 import { isServer } from 'solid-js/web'
+import { organInit, organNoteOff, organNoteOn } from '~/organ'
 
-let ctx: AudioContext | undefined
+export let ctx: AudioContext
 
 export async function play() {
 	if (isServer) {
@@ -21,8 +22,38 @@ export async function play() {
 		frequency: 440,
 	})
 
-	osc.connect(ctx.destination)
-	osc.start(0)
+	osc.start()
+
+	let master = new GainNode(ctx, { gain: 0.15 })
+	master.connect(ctx.destination)
+
+	organInit(master)
+
+	organNoteOn(0)
+	setTimeout(() => {
+		organNoteOn(4)
+	}, 200)
+	setTimeout(() => {
+		organNoteOn(7)
+	}, 400)
+	setTimeout(() => {
+		organNoteOn(12)
+	}, 600)
+
+	setTimeout(() => {
+		organNoteOff(0)
+	}, 2000)
+	setTimeout(() => {
+		organNoteOff(4)
+	}, 2000)
+	setTimeout(() => {
+		organNoteOff(7)
+	}, 2000)
+	setTimeout(() => {
+		organNoteOff(12)
+	}, 2000)
+
+	// osc.connect(ctx.destination)
 
 	await ctx.resume()
 }
@@ -41,5 +72,7 @@ export async function stop() {
 
 	await ctx.suspend()
 	await ctx.close()
+	// @ts-ignore lol
 	ctx = undefined
+	master = undefined
 }
