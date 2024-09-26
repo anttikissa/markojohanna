@@ -1,5 +1,6 @@
 import { isServer } from 'solid-js/web'
 import organ from '~/organ'
+import { playSong } from '~/song'
 
 export let ctx: AudioContext
 
@@ -27,31 +28,9 @@ export async function play() {
 	let master = new GainNode(ctx, { gain: 0.15 })
 	master.connect(ctx.destination)
 
-	organ.init(master)
+	await organ.init(master)
 
-	organ.noteOn(0)
-	setTimeout(() => {
-		organ.noteOn(4)
-	}, 200)
-	setTimeout(() => {
-		organ.noteOn(7)
-	}, 400)
-	setTimeout(() => {
-		organ.noteOn(12)
-	}, 600)
-
-	setTimeout(() => {
-		organ.noteOff(0)
-	}, 2000)
-	setTimeout(() => {
-		organ.noteOff(4)
-	}, 2000)
-	setTimeout(() => {
-		organ.noteOff(7)
-	}, 2000)
-	setTimeout(() => {
-		organ.noteOff(12)
-	}, 2000)
+	playSong(organ)
 
 	await ctx.resume()
 }

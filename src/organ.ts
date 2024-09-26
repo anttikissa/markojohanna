@@ -1,6 +1,6 @@
 
-// Note 0: 440 Hz
-// Note 12: 880 Hz
+// Note 0: C (261,6 Hz)
+// Note 12: C one octave above that
 // etc.
 
 import { ctx } from '~/audio'
@@ -14,7 +14,7 @@ async function init(master: GainNode) {
 	for (let i = 0; i < 24; i++) {
 		oscs[i] = new OscillatorNode(ctx, {
 			type: 'sine',
-			frequency: 440 * Math.pow(2, i / 12),
+			frequency: 440 * Math.pow(2, (i + 3) / 12),
 		})
 		oscs[i].start()
 		gains[i] = new GainNode(ctx, { gain: 0 })
