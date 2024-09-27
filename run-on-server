@@ -1,0 +1,3 @@
+#!/bin/bash
+
+NITRO_PORT=2809 node markojohanna/server/index.mjs
