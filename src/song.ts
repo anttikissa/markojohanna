@@ -1,3 +1,5 @@
+import { ctx } from '~/audio'
+
 type Instrument = {
 	noteOn: (note: number) => void
 	noteOff: (note: number) => void
@@ -9,7 +11,7 @@ function lookup(note: string): number {
 		offset = ('012345'.indexOf(note[note.length - 1]) - 2) * 12
 		note = note.slice(0, -1)
 
-		console.log('!!! note note, offset', note, offset)
+		// console.log('!!! note note, offset', note, offset)
 	}
 
 	let notes = note.split(' ')
@@ -54,12 +56,22 @@ export function playSong(instrument: Instrument) {
 		for (let note of notes) {
 			setTimeout(
 				() => {
+					if (!ctx) {
+						return
+					}
 					instrument.noteOn(note)
+
+					window.dispatchEvent(new CustomEvent('newHeart', {
+						detail: { note, length }
+					}))
 				},
 				(start + offset) * measureLength
 			)
 			setTimeout(
 				() => {
+					if (!ctx) {
+						return
+					}
 					instrument.noteOff(note)
 				},
 				(end + offset) * measureLength - 25

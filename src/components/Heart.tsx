@@ -1,35 +1,41 @@
-import { createSignal } from 'solid-js'
+import { createSignal, Show } from 'solid-js'
 import './Heart.css'
 
 type Props = {
 	x: number
-	y: number
+	y: number,
+	size: number
 }
 
 export default function Heart(props: Props) {
 	let [x, setX] = createSignal(props.x)
 	let [y, setY] = createSignal(props.y)
 
-	let velX = (Math.random() * 2 - 1) * 0.1
+	let velX = (Math.random() * 2 - 1) * 0.02
 	let velY = -0.25
 	let gravity = 0.25
 
 	let step = 1/60
 
 	setInterval(() => {
-		setX(x => x + velX * 1/60)
-		setY(y => y + velY * 1/60)
+		setX(x => x + velX * step)
+		setY(y => y + velY * step)
 		velY += gravity * step
-	}, 1/60)
+	}, step)
+
 	return (
-		<div
-			class="Heart"
-			style={{
-				left: `${x() * 100}%`,
-				top: `${y() * 100}%`,
-			}}
-		>
-			<p>❤️</p>
-		</div>
+		<Show when={y() < 1.1}>
+			<div
+				class="Heart"
+				style={{
+					left: `${x() * 100}%`,
+					top: `${y() * 100}%`,
+					transform: `scale(${props.size})`,
+				}}
+			>
+				<p>❤️</p>
+			</div>
+		</Show>
+
 	)
 }

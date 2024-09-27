@@ -27,7 +27,6 @@ export async function play() {
 	await organ.init(reverbNode)
 
 	playSong(organ)
-
 }
 
 export async function stop() {
