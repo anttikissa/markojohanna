@@ -93,19 +93,40 @@ export default function App() {
 		window.addEventListener('reveal', reveal)
 	}
 
+	let names = 'Marko & Johanna'
+	// Tasa-arvoinen nimijärjestys
+	if (Math.random() > 0.5) {
+		names = names.split(' & ').reverse().join(' & ')
+	}
+
+	let [playHidden, setPlayHidden] = createSignal(false)
+
+	function playAndHide() {
+		play()
+		setPlayHidden(true)
+	}
+
 	return (
 		<main>
 			<div class="player">
 				<p>
-					<button onClick={play}>Play</button>
+					<button
+						onClick={playAndHide}
+						classList={{ hidden: playHidden() }}
+					>
+						Play
+					</button>
 				</p>
 
 				<p class="fancy-text" ref={fancyRef}>
 					<span>Paljon</span> <span>onnea</span>{' '}
-					<span>hääpäivänänne</span> <span>rakkaat</span>{' '}
-					<span>Marko & Johanna</span>
-					<br />
-					<span>ja sitäkin </span><span>enemmän</span> <span>kaikkina</span>{' '}
+					<span>hääpäivänänne,</span> <span>rakkaat</span>{' '}
+					<span>{names}</span>
+					<span>
+						, <br />
+						ja sitäkin{' '}
+					</span>
+					<span>enemmän</span> <span>kaikkina</span>{' '}
 					<span>tulevina</span> <span>päivinä.</span>
 					<br />
 					<br />
@@ -123,7 +144,11 @@ export default function App() {
 					</span>
 					<br />
 					<br />
-					<span><a href="https://github.com/anttikissa/markojohanna">View Source</a></span>
+					<span>
+						<a href="https://github.com/anttikissa/markojohanna">
+							View Source
+						</a>
+					</span>
 				</p>
 			</div>
 			<For each={hearts()}>

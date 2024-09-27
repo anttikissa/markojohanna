@@ -55,9 +55,18 @@ main {
 	}
 }
 
+.hidden {
+	opacity: 0;
+	transition: opacity 0.5s;
+	/* ignore pointer events */
+	pointer-events: none;
+}
+
 .fancy-text {
-	font-size: 2rem;
+	font-size: 32px;
 	font-weight: 500;
+
+	line-height: 1.4;
 
 	span {
 		opacity: 0;
@@ -81,3 +90,12 @@ main {
 		border-bottom: 1px solid red;
 	}
 }
+
+/* media phone size */
+@media (max-width: 600px) {
+	.fancy-text {
+		font-size: 24px;
+		/*border: 1px solid red;*/
+	}
+}
+
