@@ -76,9 +76,9 @@ export default function App() {
 					Press any key to
 					<button onClick={play}>Play</button>
 				</p>
-				<p>
-					Press s to <button onClick={stop}>Stop</button>
-				</p>
+				{/*<p>*/}
+				{/*	Press s to <button onClick={stop}>Stop</button>*/}
+				{/*</p>*/}
 				<p>
 					Press r to <button onClick={reload}>Reload page</button>
 				</p>

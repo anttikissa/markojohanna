@@ -2,6 +2,8 @@
 	position: absolute;
 	font-size: 36px;
 
+	text-shadow: 0 0 50px #f00;
+
 	left: 50%;
 	top: 50%;
 }

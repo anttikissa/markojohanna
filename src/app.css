@@ -13,6 +13,9 @@ html, body, div#app {
 }
 
 main {
+	background: linear-gradient(#300 0%, #200 100%);
+
+	color: white;
 	/*border: 1px solid red;*/
 	height: 100%;
 
@@ -30,6 +33,13 @@ main {
 			font-size: 24px;
 			padding: 1rem 2rem;
 			margin: 1rem;
+
+			/* reddish white background */
+			background: #ff2d2d;
+
+			border: none;
+			border-radius: 100px;
+			color: #400;
 		}
 	}
 }
