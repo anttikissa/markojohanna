@@ -11,7 +11,7 @@ export default function Heart(props: Props) {
 	let [x, setX] = createSignal(props.x)
 	let [y, setY] = createSignal(props.y)
 
-	let velX = (Math.random() * 2 - 1) * 0.02
+	let velX = (Math.random() * 2 - 1) * 0.015
 	let velY = -0.25
 	let gravity = 0.25
 
