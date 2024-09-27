@@ -9,8 +9,10 @@ export default function App() {
 	createEffect(async () => {
 		let ev = keyDownEvent()
 		if (ev) {
-			if (ev.key === 'Meta') {
-				// Prevent cmd-tab from playing :)
+			// console.log('ev.key', ev.key)
+
+			if (ev.key === 'Meta' || ev.key === 'Control') {
+				// Prevent cmd-tab and tab switch from playing :)
 				return
 			}
 

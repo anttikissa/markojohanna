@@ -20,13 +20,6 @@ export async function play() {
 	ctx = new AudioContext({ sampleRate: 48000 })
 	await ctx.resume()
 
-	let osc = new OscillatorNode(ctx, {
-		type: 'sine',
-		frequency: 440,
-	})
-
-	osc.start()
-
 	let master = new GainNode(ctx, { gain: 0.15 })
 	master.connect(ctx.destination)
 
@@ -34,6 +27,7 @@ export async function play() {
 	await organ.init(reverbNode)
 
 	playSong(organ)
+
 }
 
 export async function stop() {

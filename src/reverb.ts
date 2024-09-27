@@ -7,7 +7,7 @@ async function init(output: AudioNode) {
 	}) as AudioBuffer
 
 	let reverb = new ConvolverNode(ctx, { buffer: impulseResponseDecoded })
-
+	// let reverb = new GainNode(ctx, { gain: 1.0 })
 	reverb.connect(output)
 
 	return reverb
