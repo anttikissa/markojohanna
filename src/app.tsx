@@ -2,6 +2,8 @@ import './app.css'
 import { useKeyDownEvent } from '@solid-primitives/keyboard'
 import { createEffect, onCleanup } from 'solid-js'
 import { play, stop } from '~/audio'
+import Heart from '~/components/Heart'
+
 
 export default function App() {
 	let keyDownEvent = useKeyDownEvent()
@@ -47,6 +49,7 @@ export default function App() {
 					Press r to <button onClick={reload}>Reload page</button>
 				</p>
 			</div>
+			<Heart x={0.3} y={0.2}></Heart>
 		</main>
 	)
 }
