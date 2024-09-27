@@ -12,6 +12,12 @@ html, body, div#app {
 	height: 100%;
 }
 
+/* selection color black on red */
+::selection {
+	color: #fee;
+	background: #e00;
+}
+
 main {
 	background: linear-gradient(#300 0%, #200 100%);
 
@@ -40,7 +46,38 @@ main {
 			border: none;
 			border-radius: 100px;
 			color: #400;
+
+			&.small {
+				line-height: 20px;
+				font-size: 20px;
+			}
 		}
 	}
 }
 
+.fancy-text {
+	font-size: 2rem;
+	font-weight: 500;
+
+	span {
+		opacity: 0;
+		color: red;
+		transition: opacity 0.1s, color 0.5s;
+
+		&.visible {
+			opacity: 1;
+			color: white;
+		}
+	}
+
+	button.small {
+		margin-bottom: 1rem;
+	}
+
+	a {
+		font-size: 16px;
+		text-decoration: none;
+		color: red;
+		border-bottom: 1px solid red;
+	}
+}

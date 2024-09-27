@@ -37,6 +37,12 @@ export function playSong(instrument: Instrument) {
 	// First measure is this much shorter
 	let offset = -0.75
 
+	function reveal(after: number = 0) {
+		setTimeout(() => {
+			window.dispatchEvent(new CustomEvent('reveal'))
+		}, (prevEnd + offset + after) * measureLength)
+	}
+
 	function note(notes: string | number[], length: number, start?: number) {
 		let updateEnd = true
 		if (typeof notes === 'string' && notes.endsWith('+')) {
@@ -102,17 +108,23 @@ export function playSong(instrument: Instrument) {
 	note('c', tiny)
 	note('c', tiny)
 
+	reveal()
+
 	// 2
 	note('c', halfPlusSome, 1)
 	note('c', tiny)
 	note('c', tiny)
 	note('c', tiny)
 
+	reveal()
+
 	// 3
 	note('c', halfPlusSome, 2)
 	note('c', tiny)
 	note('c', tiny)
 	note('c', tiny)
+
+	reveal()
 
 	// 4
 	note('c e', quarter, 3)
@@ -125,6 +137,8 @@ export function playSong(instrument: Instrument) {
 	note('c e', tiny)
 	note('c e', tiny)
 
+	reveal()
+
 	// 5
 	note('c e g', quarter)
 	note('c e g', tiny)
@@ -132,6 +146,8 @@ export function playSong(instrument: Instrument) {
 	note('c e g', tiny)
 	note('c e g', quarter)
 	note('c e g', quarter)
+
+	reveal()
 
 	// 6
 	note('a0 a1 +', half)
@@ -142,6 +158,8 @@ export function playSong(instrument: Instrument) {
 
 	note('b2 d#3 f3', eighth)
 
+	reveal()
+
 	// 7
 	note('e0 e1 +', quarter)
 	note('b2 f#3 a3', quarter)
@@ -149,11 +167,15 @@ export function playSong(instrument: Instrument) {
 	note('e0 e1 +', quarter)
 	note('b2 e3 g3', quarter)
 
+	reveal()
+
 	note('f0 f1 +', quarter)
 	note('a2 d3 f3', quarter)
 
 	note('f0 f1 +', quarter)
 	note('f2 a2 d3', quarter)
+
+	reveal()
 
 	// 8
 	note('g0 g1 +', half)
@@ -161,12 +183,16 @@ export function playSong(instrument: Instrument) {
 	note('b2', sixteenth)
 	note('c3', sixteenth)
 
+	reveal()
+
 	note('g0 g1 +', quarter)
 	note('f2 g2 d3', quarter)
 
 	note('g0 g1 +', quarter)
 	note('g2', quarter * 0.75)
 	note('d3', quarter * 0.25)
+
+	reveal()
 
 	// 9
 	note('c1 c2 g2 c3 e3', quarter)
@@ -177,6 +203,8 @@ export function playSong(instrument: Instrument) {
 	note('e3', eighth)
 	note('g3', eighth)
 
+	reveal()
+
 	// 10
 	note('a0 a1 +', half)
 	note('e3 f#3 c4', half)
@@ -185,6 +213,8 @@ export function playSong(instrument: Instrument) {
 	note('d#3 f3 b3', quarterPlusSome)
 
 	note('b2 d#3 f3', eighth)
+
+	reveal()
 
 	// 11
 	note('e0 e1 +', half)
@@ -196,6 +226,8 @@ export function playSong(instrument: Instrument) {
 	note('a2 d3 f3', quarter)
 
 	note('f2 a2 d3', quarter)
+
+	reveal()
 
 	// 12
 	note('g0 g1 +', half)
@@ -210,8 +242,14 @@ export function playSong(instrument: Instrument) {
 	note('g2 b2 d3', quarter * 0.75)
 	note('e3', quarter * 0.25)
 
+	// reveal()
+
 	// 13
 	note('g0 g2 b2 d3', half)
 	note('c1 e2 g2 c3', quarter)
+
+	reveal(0.5)
+
+	reveal(2)
 
 }

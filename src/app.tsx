@@ -57,7 +57,11 @@ export default function App() {
 			// console.log('event', note, length)
 
 			let size = length + 0.75
-			addHeart((note / 48 + 0.5) * 0.8 + Math.random() * 0.01, 0.167 + Math.random() * 0.01, size)
+			addHeart(
+				(note / 48 + 0.5) * 0.8 + Math.random() * 0.01,
+				0.167 + Math.random() * 0.01,
+				size
+			)
 		}
 
 		// @ts-ignore
@@ -69,22 +73,61 @@ export default function App() {
 		})
 	}
 
+	let fancyRef: HTMLParagraphElement
+
+	function reveal() {
+		if (!fancyRef) {
+			return
+		}
+		console.log('REVEAL')
+
+		console.log('ref', fancyRef)
+
+		let first = fancyRef.querySelector('span:not(.visible)')
+		if (first) {
+			first.classList.add('visible')
+		}
+	}
+
+	if (!isServer) {
+		window.addEventListener('reveal', reveal)
+	}
+
 	return (
 		<main>
 			<div class="player">
 				<p>
-					Press any key to
 					<button onClick={play}>Play</button>
 				</p>
-				{/*<p>*/}
-				{/*	Press s to <button onClick={stop}>Stop</button>*/}
-				{/*</p>*/}
-				<p>
-					Press r to <button onClick={reload}>Reload page</button>
+
+				<p class="fancy-text" ref={fancyRef}>
+					<span>Paljon</span> <span>onnea</span>{' '}
+					<span>hääpäivänänne</span> <span>rakkaat</span>{' '}
+					<span>Marko & Johanna</span>
+					<br />
+					<span>ja sitäkin </span><span>enemmän</span> <span>kaikkina</span>{' '}
+					<span>tulevina</span> <span>päivinä.</span>
+					<br />
+					<br />
+					<span>Antti</span>
+					<br />
+					<span>28.9.2024</span>
+					<br />
+					<span>❤️</span>
+					<br />
+					<br />
+					<span>
+						<button onClick={reload} class="small">
+							Uudestaan!
+						</button>
+					</span>
+					<br />
+					<br />
+					<span><a href="https://github.com/anttikissa/markojohanna">View Source</a></span>
 				</p>
 			</div>
 			<For each={hearts()}>
-				{({ x, y , size }) => <Heart x={x} y={y} size={size}></Heart>}
+				{({ x, y, size }) => <Heart x={x} y={y} size={size}></Heart>}
 			</For>
 		</main>
 	)
