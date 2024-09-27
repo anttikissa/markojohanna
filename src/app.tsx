@@ -11,8 +11,6 @@ export default function App() {
 	createEffect(async () => {
 		let ev = keyDownEvent()
 		if (ev) {
-			// console.log('ev.key', ev.key)
-
 			if (ev.key === 'Meta' || ev.key === 'Control') {
 				// Prevent cmd-tab and tab switch from playing :)
 				return
@@ -23,7 +21,8 @@ export default function App() {
 			} else if (ev.key === 'r') {
 				reload()
 			} else {
-				await play()
+				// Any key plays
+				await playAndHide()
 			}
 		}
 	})
@@ -50,11 +49,7 @@ export default function App() {
 
 	if (!isServer) {
 		function newHeart(e: CustomEvent<{ note: number; length: number }>) {
-			// if (!e.detail) {
-			// 	debugger
-			// }
 			let { note, length } = e.detail
-			// console.log('event', note, length)
 
 			let size = length + 0.75
 			addHeart(
@@ -73,15 +68,12 @@ export default function App() {
 		})
 	}
 
-	let fancyRef: HTMLParagraphElement
+	let fancyRef: HTMLParagraphElement | undefined = undefined
 
 	function reveal() {
 		if (!fancyRef) {
 			return
 		}
-		console.log('REVEAL')
-
-		console.log('ref', fancyRef)
 
 		let first = fancyRef.querySelector('span:not(.visible)')
 		if (first) {
@@ -101,8 +93,8 @@ export default function App() {
 
 	let [playHidden, setPlayHidden] = createSignal(false)
 
-	function playAndHide() {
-		play()
+	async function playAndHide() {
+		await play()
 		setPlayHidden(true)
 	}
 

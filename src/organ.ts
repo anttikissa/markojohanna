@@ -1,42 +1,7 @@
 import { ctx } from '~/audio'
 
-// Note 0: C (261,6 Hz)
-// Note 12: C one octave above that
-// etc.
-type Note = number
-
 // gains turn sound on and off
 let gains = [] as GainNode[]
-
-///
-
-// This is very close to sine wave actually, so don't bother
-
-// function getPeriodicWave() {
-// 	const NUMBER_OF_HARMONICS = 16;
-// 	const EVEN_COEFFICIENT = 0.3;
-// 	const DECAY = 3.5;
-//
-// 	const real = new Float32Array(NUMBER_OF_HARMONICS);
-// 	const imag = new Float32Array(NUMBER_OF_HARMONICS);
-// 	real[0] = 0;
-// 	imag[0] = 0;
-// 	for (let i = 1; i < NUMBER_OF_HARMONICS; i++) {
-// 		if (i % 2 == 1) {
-// 			real[i] = 1.0 / i ** DECAY;
-// 		} else {
-// 			real[i] = EVEN_COEFFICIENT / i ** DECAY;
-// 		}
-// 		imag[i] = 0;
-// 	}
-//
-// 	return new PeriodicWave(ctx, {
-// 		real,
-// 		imag,
-// 		disableNormalization: true
-// 	})
-// }
-///
 
 async function init(master: AudioNode) {
 	// YOLO array indexing with negative numbers lol

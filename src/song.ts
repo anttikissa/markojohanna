@@ -10,8 +10,6 @@ function lookup(note: string): number {
 	if (note.match(/[0-5]$/)) {
 		offset = ('012345'.indexOf(note[note.length - 1]) - 2) * 12
 		note = note.slice(0, -1)
-
-		// console.log('!!! note note, offset', note, offset)
 	}
 
 	let notes = note.split(' ')
@@ -92,15 +90,6 @@ export function playSong(instrument: Instrument) {
 	let half = 0.5
 	let halfPlusSome = 0.75
 	let sixteenth = quarter / 4
-
-	// let testSong = 1
-	//
-	// if (testSong) {
-	// 	note('c0', 0.25, 0.75)
-	//
-	//
-	// 	return
-	// }
 
 	// default octave is 2 (c == c2)
 	// 1
