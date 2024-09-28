@@ -231,8 +231,6 @@ export function playSong(instrument: Instrument) {
 	note('g2 b2 d3', quarter * 0.75)
 	note('e3', quarter * 0.25)
 
-	// reveal()
-
 	// 13
 	note('g0 g2 b2 d3', half)
 	note('c1 e2 g2 c3', quarter)

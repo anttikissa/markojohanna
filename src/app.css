@@ -83,11 +83,17 @@ main {
 		margin-bottom: 1rem;
 	}
 
-	a {
+	span.links {
 		font-size: 16px;
-		text-decoration: none;
-		color: red;
-		border-bottom: 1px solid red;
+		a {
+			text-decoration: none;
+			color: red;
+			border-bottom: 1px solid red;
+		}
+
+		/*&.detailed {*/
+		/*	opacity: 1;*/
+		/*}*/
 	}
 }
 

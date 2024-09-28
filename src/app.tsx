@@ -98,6 +98,12 @@ export default function App() {
 		setPlayHidden(true)
 	}
 
+	let detailedLinksRef: HTMLSpanElement | undefined = undefined
+
+	function revealDetailedLinks() {
+		detailedLinksRef?.classList.add('visible')
+	}
+
 	return (
 		<main>
 			<div class="player">
@@ -136,9 +142,31 @@ export default function App() {
 					</span>
 					<br />
 					<br />
-					<span>
+					<span class="links" onTouchStart={revealDetailedLinks} onMouseEnter={revealDetailedLinks}>
 						<a href="https://github.com/anttikissa/markojohanna">
 							View Source
+						</a>
+						<br />
+					</span>
+					<span class="links detailed" ref={detailedLinksRef}>
+						<a href="https://github.com/anttikissa/markojohanna/blob/main/src/app.tsx">
+							app.tsx
+						</a>
+						,{' '}
+						<a href="https://github.com/anttikissa/markojohanna/blob/main/src/audio.ts">
+							audio.ts
+						</a>
+						,{' '}
+						<a href="https://github.com/anttikissa/markojohanna/blob/main/src/organ.ts">
+							organ.ts
+						</a>
+						,{' '}
+						<a href="https://github.com/anttikissa/markojohanna/blob/main/src/song.ts">
+							song.ts
+						</a>
+						,{' '}
+						<a href="https://github.com/anttikissa/markojohanna/blob/main/src/reverb.ts">
+							reverb.ts
 						</a>
 					</span>
 				</p>

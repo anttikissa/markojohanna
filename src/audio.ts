@@ -6,16 +6,9 @@ import reverb from '~/reverb'
 export let ctx: AudioContext
 
 export async function play() {
-	if (isServer) {
+	if (isServer || ctx) {
 		return
 	}
-
-	if (ctx) {
-		console.log('playing already!')
-		return
-	}
-
-	console.log('play!')
 
 	ctx = new AudioContext({ sampleRate: 48000 })
 	await ctx.resume()
@@ -30,14 +23,7 @@ export async function play() {
 }
 
 export async function stop() {
-	if (isServer) {
-		return
-	}
-
-	console.log('stop!')
-
-	if (!ctx) {
-		console.log('no context to stop')
+	if (isServer || !ctx) {
 		return
 	}
 
