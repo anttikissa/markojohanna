@@ -55,6 +55,11 @@ main {
 	}
 }
 
+#oscilloscope {
+	width: 100%;
+	z-index: -1;
+}
+
 .hidden {
 	opacity: 0;
 	transition: opacity 0.5s;
@@ -95,6 +100,10 @@ main {
 		/*	opacity: 1;*/
 		/*}*/
 	}
+}
+
+#oscilloscope {
+	/*border: 1px solid red;*/
 }
 
 /* media phone size */

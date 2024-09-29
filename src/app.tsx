@@ -1,12 +1,14 @@
 import './app.css'
 import { useKeyDownEvent } from '@solid-primitives/keyboard'
 import { createEffect, createSignal, For, onCleanup } from 'solid-js'
-import { play, stop } from '~/audio'
+import { play, stop, init as initAudio } from '~/audio'
 import Heart from '~/components/Heart'
 import { isServer } from 'solid-js/web'
 
 export default function App() {
 	let keyDownEvent = useKeyDownEvent()
+
+	initAudio()
 
 	createEffect(async () => {
 		let ev = keyDownEvent()
@@ -121,32 +123,32 @@ export default function App() {
 					<span>hääpäivänänne,</span> <span>rakkaat</span>{' '}
 					<span>{names}</span>
 					<span>
-						, <br />
+						, <br/>
 						ja sitäkin{' '}
 					</span>
 					<span>enemmän</span> <span>kaikkina</span>{' '}
 					<span>tulevina</span> <span>päivinä.</span>
-					<br />
-					<br />
+					<br/>
+					<br/>
 					<span>Antti</span>
-					<br />
+					<br/>
 					<span>28.9.2024</span>
-					<br />
+					<br/>
 					<span>❤️</span>
-					<br />
-					<br />
+					<br/>
+					<br/>
 					<span>
 						<button onClick={reload} class="small">
 							Uudestaan!
 						</button>
 					</span>
-					<br />
-					<br />
+					<br/>
+					<br/>
 					<span class="links" onTouchStart={revealDetailedLinks} onMouseEnter={revealDetailedLinks}>
 						<a href="https://github.com/anttikissa/markojohanna">
 							View Source
 						</a>
-						<br />
+						<br/>
 					</span>
 					<span class="links detailed" ref={detailedLinksRef}>
 						<a href="https://github.com/anttikissa/markojohanna/blob/main/src/app.tsx">
@@ -174,6 +176,9 @@ export default function App() {
 			<For each={hearts()}>
 				{({ x, y, size }) => <Heart x={x} y={y} size={size}></Heart>}
 			</For>
+			<canvas id="oscilloscope">
+			</canvas>
+
 		</main>
 	)
 }
